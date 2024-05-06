@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Manrope:wght@200..800&display=swap"
+          rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+</head>
+<body>
+
+<header class="wrap">
+    <img src="./img/logo.png" alt="" class="logo">
+    <a href="tel:+375296205367" class="phone">+375 (29) 620–53–67</a>
+    <div class="menu">
+        <img src="./img/menu.png" alt="">
+    </div>
+</header>
+<section id="first">
+    <div class="headers">
+        <h1>Бухгалтерские услуги <br>с финансовой ответственностью</h1>
+        <p>Мы предлагаем профессиональную бухгалтерскую поддержку бизнеса более 12 лет. Проконсультируем по любому
+            интересующему вас вопросу.</p>
+        <div class="btns">
+            <a href="#" class="button">Позвонить для консультации</a>
+            <a href="#" class="button button2">Заказать обратный звонок</a>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="gallery-images">
+            <img src="./img/img1.jpg" alt="Image 1">
+            <img src="./img/img2.jpg" alt="Image 2">
+            <img src="./img/img3.jpg" alt="Image 3">
+        </div>
+        <div class="gallery-nav">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script>
+        const galleryImages = document.querySelectorAll('.gallery-images img');
+        const galleryNavItems = document.querySelectorAll('.gallery-nav span');
+        let currentIndex = 0;
+
+        galleryNavItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                changeImage(index);
+            });
+        });
+
+        function changeImage(index) {
+            galleryImages.forEach((img) => {
+                img.style.opacity = 0;
+            });
+
+            galleryNavItems.forEach((navItem) => {
+                navItem.classList.remove('active');
+            });
+
+            galleryImages[index].style.opacity = 1;
+            galleryNavItems[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        const galleryImagesContainer = document.querySelector('.gallery-images');
+        const hammertime = new Hammer(galleryImagesContainer);
+
+        hammertime.on('swipeleft', () => {
+            if (currentIndex < galleryImages.length - 1) {
+                changeImage(currentIndex + 1);
+            }
+        });
+
+        hammertime.on('swiperight', () => {
+            if (currentIndex > 0) {
+                changeImage(currentIndex - 1);
+            }
+        });
+
+    </script>
+
+</section>
+<section id="aboutus" class="wrap">
+    <div class="header-with-icon">
+        <img src="./img/header-icon.png" alt="icon">
+        <h2>Несколько слов <br> о нас</h2>
+    </div>
+    <div class="about-text">
+        <p>ООО «АккаунтПинск» - сплочённая команда, которая заботится о том,
+            чтобы вы занимались бизнесом без утомительной рутины.</p>
+        <p>Мы сами разберёмся с первичными документами, точно в срок сдадим
+            декларации и отчёты, а вы будете успешно развивать свои проекты.</p>
+    </div>
+</section>
+</body>
+</html>
